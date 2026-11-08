@@ -25,7 +25,8 @@
   }
 }
 *,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px); overflow-x:hidden}
+body{overflow-x:clip}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
