@@ -1,6 +1,6 @@
 # Omar Saif El-Nasr – Portfolio
 
-Personal portfolio: growth analytics, automation and AI tools, AIESEC leadership.
+Personal portfolio: data analytics, automation and AI tools, finance leadership.
 
 Live site: https://omarabdelaziz1515-coder.github.io
 
