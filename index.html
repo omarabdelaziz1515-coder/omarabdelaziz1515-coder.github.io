@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Omar Saif El-Nasr – Growth & data analytics</title>
+<meta name="description" content="Omar Saif El-Nasr builds the reports, automations and AI tools a growth team uses every day. BigQuery, Apps Script, Python, React.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F4F1; --ink:#18213A; --muted:#566074; --line:#CBD2CD;
+  --accent:#0E6E62; --signal:#F0C02A; --signal-ink:#18213A; --raised:#FFFFFF;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#111829; --ink:#E6E9E4; --muted:#9BA4B6; --line:#2B3552;
+    --accent:#56C6B3; --signal:#F0C02A; --signal-ink:#111829; --raised:#18213A;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem; line-height:1.55;
+  font-feature-settings:"tnum" 1;
+}
+a{color:var(--accent); text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--signal); outline-offset:3px; border-radius:2px}
+.wrap{max-width:1120px; margin:0 auto; padding:0 1.5rem}
+
+/* Hero */
+.hero{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:3.5rem; padding:5rem 0 4.5rem; align-items:start}
+.name{font-size:1rem; font-weight:700; margin:0 0 1.75rem; color:var(--muted)}
+h1{font-size:clamp(2.2rem,4.6vw,3.6rem); line-height:1.04; font-weight:800; letter-spacing:-.025em; margin:0 0 1.5rem; max-width:14ch}
+.lede{max-width:44ch; color:var(--muted); margin:0 0 2rem}
+.links{display:flex; flex-wrap:wrap; gap:.75rem}
+.btn{display:inline-block; padding:.65rem 1.1rem; border:2px solid var(--ink); color:var(--ink); text-decoration:none; font-weight:700; border-radius:999px}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn:hover{background:var(--accent); border-color:var(--accent); color:#fff}
+
+/* The board: the one bold element */
+.board{background:var(--raised); border:2px solid var(--ink); border-radius:14px; overflow:hidden}
+.board-head{display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:1rem 1.25rem; border-bottom:2px solid var(--ink)}
+.board-head h2{font-size:1.05rem; margin:0}
+.clock{font-weight:500; color:var(--muted); font-size:.95rem; white-space:nowrap}
+.board-scroll{overflow-x:auto}
+table{width:100%; border-collapse:collapse; min-width:520px}
+th{text-align:left; font-size:.85rem; font-weight:500; color:var(--muted); padding:.6rem 1.25rem; border-bottom:1px solid var(--line)}
+td{padding:.8rem 1.25rem; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.when{font-weight:700; white-space:nowrap; width:8.5rem}
+td.what strong{display:block}
+td.what span{color:var(--muted); font-size:.93rem}
+td.who{color:var(--muted); font-size:.93rem; width:9rem}
+tr.today td.when{background:var(--signal); color:var(--signal-ink)}
+.board-foot{padding:.75rem 1.25rem; font-size:.88rem; color:var(--muted); border-top:1px solid var(--line)}
+.key{display:inline-block; width:.8em; height:.8em; background:var(--signal); vertical-align:-.05em; margin-right:.35em; border-radius:2px}
+
+/* Sections */
+section{padding:4rem 0; border-top:1px solid var(--line)}
+h2.sec{font-size:clamp(1.6rem,2.6vw,2.1rem); letter-spacing:-.02em; margin:0 0 .5rem; font-weight:800}
+.sec-intro{color:var(--muted); max-width:60ch; margin:0 0 2.5rem}
+
+.feature{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,4fr); gap:3rem}
+.feature h3{font-size:1.6rem; margin:0 0 .75rem; letter-spacing:-.015em}
+.feature p{max-width:62ch}
+.feature ul{padding-left:1.1rem; margin:1rem 0 0}
+.feature li{margin-bottom:.5rem; max-width:60ch}
+.facts{border-left:4px solid var(--accent); padding-left:1.5rem; display:flex; flex-direction:column; gap:1.5rem}
+.fact b{display:block; font-size:2.2rem; line-height:1; font-weight:800; letter-spacing:-.02em}
+.fact span{color:var(--muted); font-size:.95rem}
+.stack{color:var(--muted); font-size:.93rem; margin-top:1.25rem}
+
+.work{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 3rem}
+.item{padding:1.5rem 0; border-top:1px solid var(--line)}
+.item h3{font-size:1.15rem; margin:0 0 .35rem}
+.item p{margin:0 0 .5rem; max-width:52ch}
+.item .stack{margin:0}
+
+.cols{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:3rem}
+.timeline{list-style:none; padding:0; margin:0}
+.timeline li{display:grid; grid-template-columns:9.5rem 1fr; gap:1rem; padding:1rem 0; border-top:1px solid var(--line)}
+.timeline .t{color:var(--muted); font-size:.93rem}
+.timeline b{display:block}
+.timeline span{color:var(--muted); font-size:.95rem}
+
+.skills{display:flex; flex-wrap:wrap; gap:.5rem; padding:0; list-style:none; margin:0}
+.skills li{border:1.5px solid var(--line); padding:.35rem .8rem; border-radius:999px; font-size:.95rem}
+
+.contact{padding:5rem 0 6rem}
+.contact p{max-width:52ch; color:var(--muted)}
+footer{padding:2rem 0 3rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--line)}
+
+@media (max-width:880px){
+  .hero,.feature,.cols,.work{grid-template-columns:1fr}
+  .hero{gap:2.5rem; padding:3rem 0}
+  .facts{flex-direction:row; flex-wrap:wrap; gap:1.5rem 2.5rem}
+}
+@media (max-width:520px){
+  .timeline li{grid-template-columns:1fr; gap:.2rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  tr.today td.when{transition:background .4s}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <div>
+      <p class="name">Omar Abd El-Aziz Saif El-Nasr</p>
+      <h1>I build the reports and tools a growth team opens every morning.</h1>
+      <p class="lede">Growth and data analyst from Cairo. I turn raw transaction data in BigQuery into automated reports, call lists, alerts and an AI agent that business teams use to make decisions without waiting for an analyst.</p>
+      <div class="links">
+        <a class="btn primary" href="cv.pdf">Download CV</a>
+        <a class="btn" href="mailto:omarabdelaziz1515@gmail.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/omar-abd-el-aziz-86b3a019a">LinkedIn</a>
+        <a class="btn" href="https://github.com/omarabdelaziz1515-coder">GitHub</a>
+      </div>
+    </div>
+
+    <div class="board" aria-labelledby="board-title">
+      <div class="board-head">
+        <h2 id="board-title">What my automations deliver in a normal week</h2>
+        <span class="clock" id="clock">Cairo time</span>
+      </div>
+      <div class="board-scroll">
+        <table>
+          <thead><tr><th scope="col">When</th><th scope="col">What goes out</th><th scope="col">Who gets it</th></tr></thead>
+          <tbody>
+            <tr data-cadence="daily">
+              <td class="when">Daily, 09:00</td>
+              <td class="what"><strong>Campaign conversions report</strong><span>Same-day, 3-day and 7-day conversion for every SMS campaign</span></td>
+              <td class="who">Growth team</td>
+            </tr>
+            <tr data-cadence="daily">
+              <td class="when">Daily</td>
+              <td class="what"><strong>Daily intelligence report</strong><span>The day’s key business numbers in one email</span></td>
+              <td class="who">Growth and management</td>
+            </tr>
+            <tr data-cadence="daily">
+              <td class="when">Daily</td>
+              <td class="what"><strong>Growth action lists</strong><span>Which customers to call today, and why</span></td>
+              <td class="who">Telesales and customer service</td>
+            </tr>
+            <tr data-cadence="daily">
+              <td class="when">Daily</td>
+              <td class="what"><strong>Agent alerts</strong><span>Revenue, incomplete checkouts and the SMS plan, flagged when something moves</span></td>
+              <td class="who">Growth team</td>
+            </tr>
+            <tr data-cadence="sunday">
+              <td class="when">Sunday, 09:00</td>
+              <td class="what"><strong>Delinquency deep dive</strong><span>Entry, 30+, 60+ and 90+ buckets for the last 30 days</span></td>
+              <td class="who">Risk and management</td>
+            </tr>
+            <tr data-cadence="biweekly">
+              <td class="when">Every 15 days</td>
+              <td class="what"><strong>Cohort growth report</strong><span>Every customer cohort since launch, month over month</span></td>
+              <td class="who">Management</td>
+            </tr>
+            <tr data-cadence="monthly">
+              <td class="when">Monthly</td>
+              <td class="what"><strong>One-transaction customers</strong><span>Eligible customers who never came back for a second purchase</span></td>
+              <td class="who">Business team</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="board-foot"><span class="key" aria-hidden="true"></span>Runs today, based on Cairo time</p>
+    </div>
+  </header>
+
+  <section id="agent" aria-labelledby="agent-title">
+    <h2 class="sec" id="agent-title">Featured project</h2>
+    <p class="sec-intro">The biggest thing I’ve built: an AI agent for a whole fintech company, not just the growth team.</p>
+    <div class="feature">
+      <div>
+        <h3>Sympl Business Agent</h3>
+        <p>A web app where anyone on the business team can ask a question in English or Arabic and get an answer from live company data. It writes and runs the SQL, explains the result, and remembers what it learned for next time.</p>
+        <ul>
+          <li>Ready-made analyses: campaign performance, seasonality, cohorts, checkout funnel, smart targeting and A/B test design.</li>
+          <li>Campaign Studio: drafts next month’s SMS campaign calendar, prepares the daily batches and checks them against a do-not-contact list, duplicates and gap days.</li>
+          <li>Merchant Watch: scans partner merchants’ websites to check the payment widget is still live, and alerts the team when it disappears.</li>
+          <li>Offer designs that follow the brand’s own look, learned from past creatives.</li>
+          <li>Never goes down quietly: if the main AI model fails, it falls back through a chain of other providers.</li>
+        </ul>
+        <p class="stack">Built with React, Express, BigQuery, Claude and Gemini APIs, retrieval (RAG) memory, Railway hosting, and GitHub with automated tests on every pull request.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>34</b><span>pull requests merged, one per version</span></div>
+        <div class="fact"><b>v1 → v6.20</b><span>from first build to company-wide tool</span></div>
+        <div class="fact"><b>40+</b><span>backend modules, from SQL to design rendering</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-title">
+    <h2 class="sec" id="work-title">Automations and analysis</h2>
+    <p class="sec-intro">Smaller tools that replaced manual work. Each one runs on a schedule and lands in someone’s inbox.</p>
+    <div class="work">
+      <article class="item">
+        <h3>Campaign conversions engine</h3>
+        <p>Finds every SMS campaign file across a shared Drive folder tree, matches recipients to sales, and scores same-day, 3-day and 7-day conversion in a styled daily email.</p>
+        <p class="stack">Google Apps Script, BigQuery, Google Drive API</p>
+      </article>
+      <article class="item">
+        <h3>Daily growth actions</h3>
+        <p>A daily email of call lists for telesales and customer service, cleaned of customers who hit checkout errors so agents only call people they can help.</p>
+        <p class="stack">Google Apps Script, BigQuery</p>
+      </article>
+      <article class="item">
+        <h3>Delinquency deep analysis</h3>
+        <p>Weekly report on how customers move into 30+, 60+ and 90+ day buckets, focused on the last 30 days so Risk can act on it.</p>
+        <p class="stack">SQL, Google Apps Script</p>
+      </article>
+      <article class="item">
+        <h3>Cohort growth report</h3>
+        <p>Month-over-month view of every customer cohort since launch, rewritten from a data dump into a management overview with growth insights.</p>
+        <p class="stack">BigQuery, n8n</p>
+      </article>
+      <article class="item">
+        <h3>1st to 5th transaction dashboard</h3>
+        <p>Tracks how customers move from their first purchase to their fifth, with revenue joined in from merchant settlements and caching to keep it fast.</p>
+        <p class="stack">Google Apps Script, BigQuery</p>
+      </article>
+      <article class="item">
+        <h3>Monthly campaign calendar</h3>
+        <p>A planning sheet that turns merchant offers and promo codes into each month’s SMS calendar, then into daily batch files in Drive.</p>
+        <p class="stack">Google Sheets, Apps Script</p>
+      </article>
+      <article class="item">
+        <h3>SMS campaign attribution</h3>
+        <p>Matched campaign recipients to same-day sales after normalising Egyptian mobile number formats, and packaged the results into a multi-tab Excel workbook.</p>
+        <p class="stack">Python, pandas, Excel</p>
+      </article>
+      <article class="item">
+        <h3>Down-payment error analysis</h3>
+        <p>A 12-query SQL investigation into checkout down-payment errors, delivered as a 10-tab workbook the team could filter by cause.</p>
+        <p class="stack">BigQuery SQL, Excel</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="aiesec" aria-labelledby="aiesec-title">
+    <h2 class="sec" id="aiesec-title">AIESEC leadership</h2>
+    <p class="sec-intro">Since 2020 in the world’s largest youth-run organisation: from branch president to leading AIESEC in Egypt, and now Global Finance Manager at AIESEC International.</p>
+    <div class="work">
+      <article class="item">
+        <h3>Country Director (MCP), AIESEC in Egypt</h3>
+        <p>Dec 2023 – Jul 2025, after a year as Country Director of Finance and Legalities. Directed national strategy and operations, kept oversight of the national budget and the financial health of local chapters, and represented Egypt in international forums.</p>
+        <p class="stack">Leadership, strategy, finance, team management</p>
+      </article>
+      <article class="item">
+        <h3>CURA finance tool pilot</h3>
+        <p>I run the pilot of CURA, AIESEC’s finance tool. The first pilot users report to me daily, and I turn what we learn into product changes, such as a discounting engine to keep transaction records accurate.</p>
+        <p class="stack">Product piloting, finance operations, user feedback</p>
+      </article>
+      <article class="item">
+        <h3>External panelist, AIESEC elections</h3>
+        <p>Assess written cases from candidates for regional leadership roles across finance, product and business development. I check their numbers, score each block and give the selectors interview questions that test the gaps.</p>
+        <p class="stack">Financial analysis, candidate assessment, structured feedback</p>
+      </article>
+      <article class="item">
+        <h3>Global Finance Manager, AIESEC International</h3>
+        <p>Oversee global financial operations and the Incentive-Based Debt Repayment System (IBDRS) across AIESEC entities, with automated reporting that consolidates data from four regional systems.</p>
+        <p class="stack">Financial operations, reporting automation, coaching</p>
+      </article>
+      <article class="item">
+        <h3>Project Manager, AIESEC International Congress</h3>
+        <p>Led planning, logistics and delivery of AIESEC’s flagship global congress for 200+ delegates, managed the budget, and built a live check-in tracker and real-time dashboards.</p>
+        <p class="stack">Project management, budgeting, dashboards</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="founder" aria-labelledby="founder-title">
+    <h2 class="sec" id="founder-title">Building my own</h2>
+    <div class="work">
+      <article class="item">
+        <h3>Al-Hakim, founder</h3>
+        <p>Health-tech product for Egypt, started in 2026. I lead product and feature design. Pre-launch, so more to share soon.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="background" aria-labelledby="bg-title">
+    <h2 class="sec" id="bg-title">Background</h2>
+    <div class="cols">
+      <div>
+        <h3>Experience</h3>
+        <ol class="timeline">
+          <li><span class="t">Nov 2025 – now</span><div><b>Global Finance Manager, AIESEC International</b><span>Remote</span></div></li>
+          <li><span class="t">Oct 2025 – now</span><div><b>Product Executive and Analyst, Sympl</b><span>Buy-now-pay-later fintech, Cairo (remote since Mar 2026)</span></div></li>
+          <li><span class="t">May – Aug 2025</span><div><b>Finance and Accounting Associate, Educatly</b><span>Education technology, Cairo</span></div></li>
+          <li><span class="t">Jul 2023 – Jul 2025</span><div><b>Country Director, AIESEC in Egypt</b><span>Previously Country Director of Finance and Legalities</span></div></li>
+          <li><span class="t">Oct 2023 – Jul 2024</span><div><b>Project Manager, AIESEC International Congress</b><span>Global congress, 200+ delegates</span></div></li>
+          <li><span class="t">Dec 2022 – Jul 2023</span><div><b>Data Analyst and Marketing Manager, AIESEC International</b><span>Remote</span></div></li>
+          <li><span class="t">Oct 2021 – Feb 2022</span><div><b>Commercial Analyst, Taager</b><span>E-commerce, Cairo</span></div></li>
+        </ol>
+      </div>
+      <div>
+        <h3>Education</h3>
+        <ol class="timeline">
+          <li><span class="t">Nov 2026 – Nov 2027</span><div><b>M.A. Data Analytics and Artificial Intelligence</b><span>Steinbeis University, with AASTMT</span></div></li>
+          <li><span class="t">Apr 2026</span><div><b>Advanced Data Analysis using SQL, Python and Tableau</b><span>Paris ESLSCA Business School</span></div></li>
+          <li><span class="t">2019 – 2025</span><div><b>Bachelor of Clinical Pharmacy (Pharm.D)</b><span>Capital University (formerly Helwan University), Cairo. Licensed pharmacist.</span></div></li>
+        </ol>
+      </div>
+    </div>
+    <h3 style="margin-top:3rem">Tools I use every week</h3>
+    <ul class="skills">
+      <li>SQL (BigQuery)</li><li>Google Apps Script</li><li>JavaScript</li><li>Python and pandas</li>
+      <li>Tableau</li><li>Excel and Google Sheets</li><li>React and Express</li><li>n8n</li>
+      <li>Claude and Gemini APIs</li><li>Git and GitHub</li><li>Arabic, English, French</li>
+    </ul>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <h2 class="sec" id="contact-title">Get in touch</h2>
+    <p>If your team spends hours pulling the same numbers every week, I’d like to hear about it.</p>
+    <div class="links">
+      <a class="btn primary" href="mailto:omarabdelaziz1515@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/omar-abd-el-aziz-86b3a019a">LinkedIn</a>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Omar Saif El-Nasr, Cairo. Company data shown on this site is described, never shared.</div></footer>
+
+<script>
+(function(){
+  var clock = document.getElementById('clock');
+  function tick(){
+    try{
+      var now = new Date();
+      var fmt = new Intl.DateTimeFormat('en-GB',{timeZone:'Africa/Cairo',weekday:'short',hour:'2-digit',minute:'2-digit'});
+      var parts = fmt.formatToParts(now), wd='', hh='', mm='';
+      parts.forEach(function(p){ if(p.type==='weekday')wd=p.value; if(p.type==='hour')hh=p.value; if(p.type==='minute')mm=p.value; });
+      clock.textContent = 'Cairo, ' + wd + ' ' + hh + ':' + mm;
+      document.querySelectorAll('tbody tr').forEach(function(r){
+        var c = r.getAttribute('data-cadence');
+        r.classList.toggle('today', c==='daily' || (c==='sunday' && wd==='Sun'));
+      });
+    }catch(e){ clock.textContent = 'Cairo time'; }
+  }
+  tick(); setInterval(tick, 30000);
+})();
+</script>
+</body>
+</html>
