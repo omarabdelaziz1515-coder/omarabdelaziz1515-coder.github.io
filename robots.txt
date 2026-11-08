@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://omarabdelaziz1515-coder.github.io/sitemap.xml
