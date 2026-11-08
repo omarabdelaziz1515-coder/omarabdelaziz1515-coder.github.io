@@ -8,7 +8,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Noto+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#F2F4F1; --ink:#18213A; --muted:#566074; --line:#CBD2CD;
@@ -30,7 +30,6 @@ body{
   margin:0; background:var(--paper); color:var(--ink);
   font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   font-size:1.0625rem; line-height:1.55;
-  font-feature-settings:"tnum" 1;
 }
 a{color:var(--accent); text-underline-offset:.2em}
 a:hover{text-decoration-thickness:2px}
@@ -42,8 +41,11 @@ a:hover{text-decoration-thickness:2px}
 .name{font-size:1rem; font-weight:700; margin:0 0 1.75rem; color:var(--muted)}
 h1{font-size:clamp(2.2rem,4.6vw,3.6rem); line-height:1.04; font-weight:800; letter-spacing:-.025em; margin:0 0 1.5rem; max-width:14ch}
 .lede{max-width:44ch; color:var(--muted); margin:0 0 2rem}
-.links{display:flex; flex-wrap:wrap; gap:.75rem}
-.btn{display:inline-block; padding:.65rem 1.1rem; border:2px solid var(--ink); color:var(--ink); text-decoration:none; font-weight:700; border-radius:999px}
+.links{display:flex; flex-wrap:wrap; gap:.6rem}
+.social{display:flex; gap:1.5rem; margin:1.25rem 0 0; font-weight:700}
+.social a{color:var(--ink)}
+.social a:hover{color:var(--accent)}
+.btn{display:inline-block; padding:.6rem 1rem; transition:background .15s,border-color .15s,color .15s; border:2px solid var(--ink); color:var(--ink); text-decoration:none; font-weight:700; border-radius:999px}
 .btn.primary{background:var(--ink); color:var(--paper)}
 .btn:hover{background:var(--accent); border-color:var(--accent); color:#fff}
 
@@ -61,9 +63,10 @@ td.when{font-weight:700; white-space:nowrap; width:8.5rem}
 td.what strong{display:block}
 td.what span{color:var(--muted); font-size:.93rem}
 td.who{color:var(--muted); font-size:.93rem; width:9rem}
-tr.today td.when{background:var(--signal); color:var(--signal-ink)}
+tr.today td.when{box-shadow:inset 4px 0 0 var(--signal)}
+tr.today td.when::after{content:"Today"; display:block; width:fit-content; margin-top:.35rem; font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:var(--signal); color:var(--signal-ink); padding:.1rem .45rem; border-radius:4px}
 .board-foot{padding:.75rem 1.25rem; font-size:.88rem; color:var(--muted); border-top:1px solid var(--line)}
-.key{display:inline-block; width:.8em; height:.8em; background:var(--signal); vertical-align:-.05em; margin-right:.35em; border-radius:2px}
+.key{display:inline-block; width:.3em; height:1em; background:var(--signal); vertical-align:-.05em; margin-right:.35em; border-radius:2px}
 
 /* Sections */
 section{padding:4rem 0; border-top:1px solid var(--line)}
@@ -100,13 +103,70 @@ h2.sec{font-size:clamp(1.6rem,2.6vw,2.1rem); letter-spacing:-.02em; margin:0 0 .
 .contact p{max-width:52ch; color:var(--muted)}
 footer{padding:2rem 0 3rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--line)}
 
+
+/* Numbers only get tabular figures */
+.clock,td.when,.nums b,.timeline .t{font-variant-numeric:tabular-nums}
+
+/* Featured agent */
+.agent{position:relative; color:#E6E9E4; padding:5rem 0; border-top:0; isolation:isolate}
+.agent::before{content:""; position:absolute; inset:0 calc(50% - 50vw); background:#111829; z-index:-1;
+  background-image:radial-gradient(60rem 30rem at 85% 0%,rgba(86,198,179,.18),transparent 60%)}
+.agent + section{border-top:0}
+.eyebrow{display:inline-block; margin:0 0 1rem; font-size:.85rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#111829; background:var(--signal); padding:.25rem .65rem; border-radius:999px}
+.agent-top{display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:3.5rem; align-items:start}
+.agent-h{font-size:clamp(2.2rem,4.4vw,3.4rem); line-height:1.05; letter-spacing:-.025em; font-weight:800; margin:0 0 1.25rem}
+.agent-lede{font-size:1.15rem; color:#B9C1D0; max-width:52ch; margin:0}
+.chat{background:#18213A; border:1px solid #2B3552; border-radius:16px; padding:1.25rem; box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.chat-bar{display:flex; gap:.4rem; align-items:center; margin-bottom:1rem}
+.chat-bar span{width:.65rem; height:.65rem; border-radius:50%; background:#2B3552}
+.chat-bar em{margin-left:auto; font-style:normal; font-size:.75rem; color:#9BA4B6; letter-spacing:.06em; text-transform:uppercase}
+.msg{margin:0 0 .6rem; padding:.65rem .9rem; border-radius:12px 12px 4px 12px; background:#56C6B3; color:#111829; font-weight:500; width:fit-content; max-width:90%; margin-left:auto}
+.msg.ar{font-family:"Noto Sans Arabic","Segoe UI",Tahoma,sans-serif; border-radius:12px 12px 12px 4px; margin-left:0; margin-right:auto; background:#2B3552; color:#E6E9E4}
+.steps{list-style:none; counter-reset:s; padding:0; margin:1.1rem 0 0; border-top:1px solid #2B3552; padding-top:1rem}
+.steps li{counter-increment:s; display:grid; grid-template-columns:1.5rem 1fr; gap:.75rem; align-items:start; padding:.3rem 0; color:#B9C1D0; font-size:.95rem}
+.steps li::before{content:counter(s); flex:none; width:1.5rem; height:1.5rem; border-radius:50%; display:grid; place-items:center; font-size:.8rem; font-weight:700; background:#F0C02A; color:#111829; margin-top:.05rem}
+.steps b{color:#E6E9E4}
+.caps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:3.5rem}
+.caps article{background:rgba(255,255,255,.035); border:1px solid #2B3552; border-radius:14px; padding:1.4rem 1.4rem 1.5rem; transition:border-color .2s, transform .2s}
+.caps article:hover{border-color:#56C6B3; transform:translateY(-2px)}
+.caps h3{margin:0 0 .5rem; font-size:1.1rem; color:#fff}
+.caps h3::before{content:""; display:block; width:1.75rem; height:3px; background:#56C6B3; margin-bottom:.9rem; border-radius:2px}
+.caps p{margin:0; color:#B9C1D0; font-size:.97rem}
+.agent-foot{display:flex; flex-direction:column; gap:2rem; margin-top:3rem; padding-top:2rem; border-top:1px solid #2B3552}
+.nums{display:flex; flex-wrap:wrap; gap:1.5rem 3rem}
+.nums b{display:block; font-size:2.2rem; line-height:1; font-weight:800; letter-spacing:-.02em; color:#F0C02A}
+.nums span{display:block; margin-top:.4rem; color:#9BA4B6; font-size:.9rem; max-width:18ch}
+.chips{list-style:none; display:flex; flex-wrap:wrap; gap:.45rem; padding:0; margin:0; }
+.chips li{font-size:.85rem; padding:.3rem .7rem; border:1px solid #2B3552; border-radius:999px; color:#C9D0DC}
+
+@media (max-width:880px){
+  .agent-top{grid-template-columns:1fr; gap:2.5rem}
+  .caps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .caps{grid-template-columns:1fr}
+  .agent{padding:3.5rem 0}
+}
+
 @media (max-width:880px){
   .hero,.feature,.cols,.work{grid-template-columns:1fr}
   .hero{gap:2.5rem; padding:3rem 0}
   .facts{flex-direction:row; flex-wrap:wrap; gap:1.5rem 2.5rem}
 }
-@media (max-width:520px){
+@media (max-width:600px){
   .timeline li{grid-template-columns:1fr; gap:.2rem}
+  table{min-width:0}
+  thead{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
+  tbody tr{display:block; padding:.9rem 1.1rem; border-bottom:1px solid var(--line)}
+  tbody tr:last-child{border-bottom:0}
+  tbody td{display:block; padding:0; border:0; width:auto}
+  td.when{width:auto; display:flex; gap:.6rem; align-items:center; margin-bottom:.35rem}
+  tr.today{box-shadow:inset 4px 0 0 var(--signal)}
+  tr.today td.when{box-shadow:none}
+  tr.today td.when::after{margin-top:0}
+  td.who{margin-top:.35rem; width:auto}
+  td.who::before{content:"For: "}
+  .board-head{flex-direction:column; gap:.25rem}
 }
 @media (prefers-reduced-motion:no-preference){
   tr.today td.when{transition:background .4s}
@@ -120,13 +180,12 @@ footer{padding:2rem 0 3rem; color:var(--muted); font-size:.88rem; border-top:1px
     <div>
       <p class="name">Omar Abd El-Aziz Saif El-Nasr</p>
       <h1>I build the reports and tools a growth team opens every morning.</h1>
-      <p class="lede">Growth and data analyst from Cairo. I turn raw transaction data in BigQuery into automated reports, call lists, alerts and an AI agent that business teams use to make decisions without waiting for an analyst.</p>
+      <p class="lede">Growth and data analyst from Cairo. I turn raw transaction data in BigQuery into automated reports, call lists, alerts and <a href="#agent">an AI agent</a> that business teams use to make decisions without waiting for an analyst.</p>
       <div class="links">
         <a class="btn primary" href="cv.pdf">Download CV</a>
         <a class="btn" href="mailto:omarabdelaziz1515@gmail.com">Email me</a>
-        <a class="btn" href="https://www.linkedin.com/in/omar-abd-el-aziz-86b3a019a">LinkedIn</a>
-        <a class="btn" href="https://github.com/omarabdelaziz1515-coder">GitHub</a>
       </div>
+      <p class="social"><a href="https://www.linkedin.com/in/omar-abd-el-aziz-86b3a019a">LinkedIn</a><a href="https://github.com/omarabdelaziz1515-coder">GitHub</a></p>
     </div>
 
     <div class="board" aria-labelledby="board-title">
@@ -176,31 +235,49 @@ footer{padding:2rem 0 3rem; color:var(--muted); font-size:.88rem; border-top:1px
           </tbody>
         </table>
       </div>
-      <p class="board-foot"><span class="key" aria-hidden="true"></span>Runs today, based on Cairo time</p>
+      <p class="board-foot"><span class="key" aria-hidden="true"></span>Marked rows run today, based on Cairo time</p>
     </div>
   </header>
 
-  <section id="agent" aria-labelledby="agent-title">
-    <h2 class="sec" id="agent-title">Featured project</h2>
-    <p class="sec-intro">The biggest thing I’ve built: an AI agent for a whole fintech company, not just the growth team.</p>
-    <div class="feature">
+  <section id="agent" class="agent" aria-labelledby="agent-title">
+    <div class="agent-top">
       <div>
-        <h3>Sympl Business Agent</h3>
-        <p>A web app where anyone on the business team can ask a question in English or Arabic and get an answer from live company data. It writes and runs the SQL, explains the result, and remembers what it learned for next time.</p>
-        <ul>
-          <li>Ready-made analyses: campaign performance, seasonality, cohorts, checkout funnel, smart targeting and A/B test design.</li>
-          <li>Campaign Studio: drafts next month’s SMS campaign calendar, prepares the daily batches and checks them against a do-not-contact list, duplicates and gap days.</li>
-          <li>Merchant Watch: scans partner merchants’ websites to check the payment widget is still live, and alerts the team when it disappears.</li>
-          <li>Offer designs that follow the brand’s own look, learned from past creatives.</li>
-          <li>Never goes down quietly: if the main AI model fails, it falls back through a chain of other providers.</li>
-        </ul>
-        <p class="stack">Built with React, Express, BigQuery, Claude and Gemini APIs, retrieval (RAG) memory, Railway hosting, and GitHub with automated tests on every pull request.</p>
+        <p class="eyebrow">Featured project</p>
+        <h2 class="agent-h" id="agent-title">Sympl Business Agent</h2>
+        <p class="agent-lede">An AI analyst for a whole fintech company. Anyone on the business team asks a question in English or Arabic, and it writes the SQL, runs it on live BigQuery data, explains the answer, and remembers what it learned for next time.</p>
       </div>
-      <div class="facts">
-        <div class="fact"><b>34</b><span>pull requests merged, one per version</span></div>
-        <div class="fact"><b>v1 → v6.20</b><span>from first build to company-wide tool</span></div>
-        <div class="fact"><b>40+</b><span>backend modules, from SQL to design rendering</span></div>
+      <div class="chat" aria-label="How a question flows through the agent (illustration)">
+        <div class="chat-bar"><span></span><span></span><span></span><em>Illustration</em></div>
+        <p class="msg q">Which SMS campaigns converted best last week?</p>
+        <p class="msg q ar" lang="ar" dir="rtl">ما هي أفضل حملات الرسائل تحويلاً الأسبوع الماضي؟</p>
+        <ol class="steps">
+          <li><span><b>Understands</b> the question in either language</span></li>
+          <li><span><b>Writes SQL</b> against the company’s BigQuery tables</span></li>
+          <li><span><b>Runs it</b> on live data and checks the result</span></li>
+          <li><span><b>Explains</b> the answer in plain words</span></li>
+          <li><span><b>Remembers</b> what it learned for the next question</span></li>
+        </ol>
       </div>
+    </div>
+
+    <div class="caps">
+      <article><h3>Ready-made analyses</h3><p>Campaign performance, seasonality, cohorts, checkout funnel, smart targeting and A/B test design, one click away.</p></article>
+      <article><h3>Campaign Studio</h3><p>Drafts next month’s SMS campaign calendar, prepares the daily batches and checks them against a do-not-contact list, duplicates and gap days.</p></article>
+      <article><h3>Merchant Watch</h3><p>Scans partner merchants’ websites to check the payment widget is still live, and alerts the team the moment it disappears.</p></article>
+      <article><h3>On-brand offer designs</h3><p>Generates offer creatives that follow the brand’s own look, learned from past campaigns.</p></article>
+      <article><h3>Daily agent alerts</h3><p>Watches revenue, incomplete checkouts and the SMS plan, and flags the team when something moves.</p></article>
+      <article><h3>Never goes down quietly</h3><p>If the main AI model fails, it falls back through a chain of other providers so the team always gets an answer.</p></article>
+    </div>
+
+    <div class="agent-foot">
+      <div class="nums">
+        <div><b>v1 → v6.20</b><span>from first build to company-wide tool</span></div>
+        <div><b>34</b><span>pull requests merged, one per version</span></div>
+        <div><b>40+</b><span>backend modules, from SQL to design rendering</span></div>
+      </div>
+      <ul class="chips" aria-label="Built with">
+        <li>React</li><li>Express</li><li>BigQuery</li><li>Claude API</li><li>Gemini API</li><li>RAG memory</li><li>Railway</li><li>CI tests on every PR</li>
+      </ul>
     </div>
   </section>
 
